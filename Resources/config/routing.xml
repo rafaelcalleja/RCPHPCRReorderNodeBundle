@@ -4,7 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="rcphpcr_reorder_nodes_homepage" pattern="/hello/{name}">
+    <route id="rcphpcr_reorder_nodes_homepage" pattern="/node/{nodename}">
         <default key="_controller">RCPHPCRReorderNodesBundle:Default:index</default>
+        <requirement key="nodename">.+</requirement>
     </route>
+    
+    <route id="rcphpcr_reorder_nodes_orderaction" pattern="/doorder/{nodename}">
+        <default key="_controller">RCPHPCRReorderNodesBundle:Default:doorder</default>
+        <requirement key="nodename">.+</requirement>
+		<requirement key="_method">POST</requirement>
+    </route>
+    
 </routes>

@@ -4,17 +4,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="rcphpcr_reorder_nodes.example.class">RC\PHPCRReorderNodesBundle\Example</parameter>
+        <parameter key="rc.phpcr.reorder.nodes.authorizenode.class">RC\PHPCRReorderNodesBundle\Services\AuthorizeNode</parameter>
+        <parameter key="rc.phpcr.reorder.nodes.ordernodes.class">RC\PHPCRReorderNodesBundle\Services\OrderingNodes</parameter>
     </parameters>
+    
 
     <services>
-        <service id="rcphpcr_reorder_nodes.example" class="%rcphpcr_reorder_nodes.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+    
+       <service id="rc.phpcr.reorder.nodes.authorizenode" class="%rc.phpcr.reorder.nodes.authorizenode.class%">
+            <argument type="service" id="security.context" />
+            <argument>%rcphpcr_reorder_nodes.nodes%</argument>
+        </service>
+        <service id="rc.phpcr.reorder.nodes.ordernodes" class="%rc.phpcr.reorder.nodes.ordernodes.class%">
+            <argument type="service" id="doctrine_phpcr.odm.document_manager" />
         </service>
     </services>
-    -->
 </container>

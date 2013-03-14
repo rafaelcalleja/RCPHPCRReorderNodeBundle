@@ -21,7 +21,19 @@ class RCPHPCRReorderNodesExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        
+        $keys = array_keys($config['nodes']);
+        
+        $nodes = array();
+        
+        foreach($keys as $nodename){
+        	if(isset($config['templates'][$nodename]) && isset($config['roles'][$nodename])){
+        		$nodes[] = array( $nodename => array('node' => $config['nodes'][$nodename], 'template' => $config['templates'][$nodename], 'role' => $config['roles'][$nodename]));
+        	}
+        }
+        
+        $container->setParameter('rcphpcr_reorder_nodes.nodes', $nodes);
+        
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }

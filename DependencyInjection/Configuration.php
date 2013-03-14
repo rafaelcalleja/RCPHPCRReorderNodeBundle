@@ -18,7 +18,13 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('rcphpcr_reorder_nodes');
+        $rootNode = $treeBuilder->root('rcphpcr_reorder_nodes', 'array');
+        $rootNode
+        ->children()
+        	->arrayNode('nodes')->defaultValue(array())->prototype('scalar')->end()->end()
+        	->arrayNode('templates')->defaultValue(array())->prototype('scalar')->end()->end()
+        	->arrayNode('roles')->defaultValue(array())->prototype('scalar')->end()->end()
+        ->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
