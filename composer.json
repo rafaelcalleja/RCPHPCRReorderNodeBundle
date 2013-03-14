@@ -1,0 +1,25 @@
+{
+    "name": "rc/phpcr-reorder-node-bundle",
+    "type": "symfony-bundle",
+    "description": "Reorder PHPCR nodes Bundle",
+    "keywords": ["phpcr", "node", "reorder", "order", "bundle"],
+    "homepage": "https://github.com/rafaelcalleja/RCPHPCRReorderNodeBundle.git", 
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rafael Calleja",
+            "email": "rafa.calleja@d-noise.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.1,<2.2-dev"
+    },
+    "autoload": {
+        "psr-0": { "RC\\PHPCRReorderNodesBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "RC/PHPCRReorderNodesBundle"
+}
