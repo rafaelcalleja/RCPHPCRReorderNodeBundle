@@ -15,6 +15,8 @@
        <service id="rc.phpcr.reorder.nodes.authorizenode" class="%rc.phpcr.reorder.nodes.authorizenode.class%">
             <argument type="service" id="security.context" />
             <argument>%rcphpcr_reorder_nodes.nodes%</argument>
+            <argument type="service" id="doctrine_phpcr.odm.document_manager" />
+            
         </service>
         <service id="rc.phpcr.reorder.nodes.ordernodes" class="%rc.phpcr.reorder.nodes.ordernodes.class%">
             <argument type="service" id="doctrine_phpcr.odm.document_manager" />

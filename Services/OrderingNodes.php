@@ -26,7 +26,11 @@ class OrderingNodes {
 	}
 	
 	public function getNodeNames($nodepath){
-		return $this->dm->getPhpcrSession()->getNode(PathHelper::absolutizePath($nodepath, '', false, false))->getNodeNames();
+		try {
+				return $this->dm->getPhpcrSession()->getNode(PathHelper::absolutizePath($nodepath, '', false, false))->getNodeNames();
+		}catch(\Exception $e){
+			
+		}
 	}
 	
 	public function getChildrens($nodepath){

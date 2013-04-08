@@ -28,13 +28,18 @@ class RCPHPCRReorderNodesExtension extends Extension
         
         foreach($keys as $nodename){
         	if(isset($config['templates'][$nodename]) && isset($config['roles'][$nodename])){
-        		$nodes[] = array( $nodename => array('node' => $config['nodes'][$nodename], 'template' => $config['templates'][$nodename], 'role' => $config['roles'][$nodename]));
+        		$childrens = (isset($config['childrens'][$nodename]) && $config['childrens'][$nodename]) ? true : false ;
+       			$nodes[$nodename] = array('childrens' => $childrens, 'node' => $config['nodes'][$nodename], 'template' => $config['templates'][$nodename], 'role' => $config['roles'][$nodename]);
         	}
         }
+        
+        var_dump($nodes);
         
         $container->setParameter('rcphpcr_reorder_nodes.nodes', $nodes);
         
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }
+    
+    
 }
