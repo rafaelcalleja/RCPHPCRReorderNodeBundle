@@ -21,8 +21,11 @@ class AuthorizeNode {
 	
 	protected function nodeExists($nodepath){
 		foreach($this->nodes as $nodename => $data){
-			if($data['childrens'] && strpos( PathHelper::absolutizePath($nodepath, '', false, false), PathHelper::absolutizePath($data['node'], '', false, false), 0 ) !== FALSE ) {
-				$this->nodes[$nodename]['node'] = PathHelper::absolutizePath($nodepath, '', false, false);
+			$data['node'] = PathHelper::absolutizePath($data['node'], '', false, false);
+			$nodepath = PathHelper::absolutizePath($nodepath, '', false, false);
+			if($data["denied_root"] && $nodepath == $data['node'] ) return false; 
+			if($data['childrens'] && strpos( $nodepath, $data['node'], 0 ) !== FALSE ) {
+				$this->nodes[$nodename]['node'] = $nodepath;
 				return $this->isRealNode($this->nodes[$nodename]['node']);
 			}
 			if($data['node'] == PathHelper::absolutizePath($nodepath, '', false, false) ) return $this->isRealNode($this->nodes[$nodename]['node']);							

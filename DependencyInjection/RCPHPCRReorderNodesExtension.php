@@ -29,7 +29,8 @@ class RCPHPCRReorderNodesExtension extends Extension
         foreach($keys as $nodename){
         	if(isset($config['templates'][$nodename]) && isset($config['roles'][$nodename])){
         		$childrens = (isset($config['childrens'][$nodename]) && $config['childrens'][$nodename]) ? true : false ;
-       			$nodes[$nodename] = array('childrens' => $childrens, 'node' => $config['nodes'][$nodename], 'template' => $config['templates'][$nodename], 'role' => $config['roles'][$nodename]);
+        		$denied_root = (isset($config['denied_root'][$nodename]) && $config['denied_root'][$nodename]) ? true : false ;
+       			$nodes[$nodename] = array('denied_root' => $denied_root, 'childrens' => $childrens, 'node' => $config['nodes'][$nodename], 'template' => $config['templates'][$nodename], 'role' => $config['roles'][$nodename]);
         	}
         }
         

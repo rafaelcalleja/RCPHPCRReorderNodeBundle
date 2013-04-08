@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
         	->arrayNode('templates')->defaultValue(array())->prototype('scalar')->end()->end()
         	->arrayNode('roles')->defaultValue(array())->prototype('scalar')->end()->end()
         	->arrayNode('childrens')->defaultValue(array())->prototype('scalar')->end()->end()
+        	->arrayNode('denied_root')->defaultValue(array())->prototype('scalar')->end()->end()
         ->end();
 
         // Here you should define the parameters that are allowed to
