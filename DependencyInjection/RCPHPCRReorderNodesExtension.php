@@ -34,7 +34,6 @@ class RCPHPCRReorderNodesExtension extends Extension
         	}
         }
         
-        var_dump($nodes);
         
         $container->setParameter('rcphpcr_reorder_nodes.nodes', $nodes);
         
