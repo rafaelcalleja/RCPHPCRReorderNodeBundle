@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="rc.phpcr.reorder.nodes.authorizenode.class">RC\PHPCRReorderNodesBundle\Services\AuthorizeNode</parameter>
         <parameter key="rc.phpcr.reorder.nodes.ordernodes.class">RC\PHPCRReorderNodesBundle\Services\OrderingNodes</parameter>
+        <parameter key="rc.phpcr.reorder.twig.extension.class">RC\PHPCRReorderNodesBundle\Twig\OrderUtils</parameter>
     </parameters>
     
 
@@ -20,6 +21,12 @@
         </service>
         <service id="rc.phpcr.reorder.nodes.ordernodes" class="%rc.phpcr.reorder.nodes.ordernodes.class%">
             <argument type="service" id="doctrine_phpcr.odm.document_manager" />
+        </service>
+
+        <service id="rc.phpcr.reorder.twig.extension" class="%rc.phpcr.reorder.twig.extension.class%">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container"/>
+            <argument>%symfony_cmf_menu.document_manager_name%</argument>
         </service>
     </services>
 </container>
