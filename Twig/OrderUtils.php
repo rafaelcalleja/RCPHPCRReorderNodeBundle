@@ -35,7 +35,7 @@ class OrderUtils extends \Twig_Extension
     }
 
     public function canReorder($document){
-        //var_dump(get_class($document), $document->getId());
+
         if(!$document instanceof BaseBlock && !$document instanceof MenuNode ) return false;
 
         $nodename = $document->getId();

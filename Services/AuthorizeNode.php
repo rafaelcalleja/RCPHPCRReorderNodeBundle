@@ -29,10 +29,12 @@ class AuthorizeNode {
 
 			if($data["denied_root"] && $nodepath == $data['node'] ) return false;
 
+
 			if($data['childrens'] &&  strpos( $nodepath, $data['node'], 0 ) !== FALSE ) {
 				$this->nodes[$nodename]['node'] = $nodepath;
 				return $this->isRealNode($this->nodes[$nodename]['node']);
 			}
+
 
             if($data['childrens'] && @preg_match("/$node/", $nodepath) ){
                 return $this->isRealNode($nodepath);
@@ -51,14 +53,16 @@ class AuthorizeNode {
 	
 	protected function getRoles($nodepath){
 		foreach($this->nodes as $nodename => $data){
-			if($data['node'] == PathHelper::absolutizePath($nodepath, '', false, false) ) return $data['role'];
+            $node = $data['node'];
+			if($data['node'] == PathHelper::absolutizePath($nodepath, '', false, false) || @preg_match("/$node/", $nodepath)  ) return $data['role'];
 		}
 		return false;		
 	}
 	
 	public function getTemplate($nodepath){
 		foreach($this->nodes as $nodename => $data){
-			if($data['node'] == PathHelper::absolutizePath($nodepath, '', false, false) ) return $data['template'];
+            $node = $data['node'];
+			if($data['node'] == PathHelper::absolutizePath($nodepath, '', false, false) || @preg_match("/$node/", $nodepath) ) return $data['template'];
 		}
 		return false;
 	}
