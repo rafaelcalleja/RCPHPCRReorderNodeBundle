@@ -59,7 +59,7 @@ class OrderUtils extends \Twig_Extension
     public function hasChildren($children){
     	try{
             if(!$children instanceof \Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode ) return false;
-	    	return count($children->getChildren()) > 0;
+	    	return count($children->getChildren()) > 1;
     	}catch(\Exception $e){
     		return false;
     	}
