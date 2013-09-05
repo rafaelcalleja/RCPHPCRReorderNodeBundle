@@ -49,11 +49,11 @@ class OrderUtils extends \Twig_Extension
         return true;
     }
 
-    public function getPath($document){
+    public function getPath($document, $locale = false){
         if(!$document instanceof BaseBlock  && !$document instanceof MenuNode) return false;
 
         $generator = $this->container->get('router');
-        return $generator->generate('rcphpcr_reorder_nodes_homepage', array('nodename' => $document->getId()));
+        return $generator->generate('rcphpcr_reorder_nodes_homepage', array('nodename' => $document->getId(), 'locale' => $locale));
     }
    
     public function hasChildren($children){

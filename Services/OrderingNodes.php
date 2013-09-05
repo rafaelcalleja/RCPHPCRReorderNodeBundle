@@ -33,8 +33,8 @@ class OrderingNodes {
 		}
 	}
 	
-	public function getChildrens($nodepath){
-		return $this->dm->getChildren($this->dm->find(null, PathHelper::absolutizePath($nodepath, '', false, false)), null, 1);
+	public function getChildrens($nodepath, $locale = false){
+		return $this->dm->getChildren($this->dm->find(null, PathHelper::absolutizePath($nodepath, '', false, false)), null, 1, $locale);
 	}
 	
 	

@@ -4,8 +4,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="rcphpcr_reorder_nodes_homepage" pattern="/node/{nodename}">
+    <route id="rcphpcr_reorder_nodes_homepage" pattern="/node/{nodename}/locale/{locale}">
         <default key="_controller">RCPHPCRReorderNodesBundle:Default:index</default>
+        <default key="locale"></default>
         <requirement key="nodename">.+</requirement>
     </route>
     

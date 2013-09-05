@@ -9,7 +9,7 @@ use PHPCR\Util\NodeHelper;
 
 class DefaultController extends Controller
 {
-    public function indexAction($nodename){
+    public function indexAction($nodename, $locale = false){
     	
     	$data = $this->get('rc.phpcr.reorder.nodes.authorizenode');
 
@@ -26,7 +26,7 @@ class DefaultController extends Controller
         }*/
 
     	
-        return $this->render($template, array('nodename' => $nodename, 'nodenames' => $order->getNodeNames($nodename), 'childrens' => $order->getChildrens($nodename) ));
+        return $this->render($template, array('nodename' => $nodename, 'nodenames' => $order->getNodeNames($nodename), 'childrens' => $order->getChildrens($nodename, $locale) ));
     }
     
     public function doorderAction($nodename){
