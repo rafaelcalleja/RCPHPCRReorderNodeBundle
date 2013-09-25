@@ -31,6 +31,7 @@ class OrderUtils extends \Twig_Extension
         	'order_has_children'=>  new \Twig_Function_Method($this, 'hasChildren'),
             'order_can_reoder'=>  new \Twig_Function_Method($this, 'canReorder'),
             'reorder_path'=>  new \Twig_Function_Method($this, 'getPath'),
+            'reorder_parent_path'=>  new \Twig_Function_Method($this, 'getParentPath'),
         );
     }
 
@@ -49,11 +50,23 @@ class OrderUtils extends \Twig_Extension
         return true;
     }
 
-    public function getPath($document, $locale = false){
+    public function getPath($document, $locale = false, $ref = true){
         if(!$document instanceof BaseBlock  && !$document instanceof MenuNode) return false;
 
         $generator = $this->container->get('router');
-        return $generator->generate('rcphpcr_reorder_nodes_homepage', array('nodename' => $document->getId(), 'locale' => $locale));
+        $ref = ( $ref )  ? urldecode($this->container->get('request')->getPathInfo()) : false;
+        return $generator->generate('rcphpcr_reorder_nodes_homepage', array('nodename' => $document->getId(), 'locale' => $locale, 'ref' => $ref ));
+    }
+
+    public function getParentPath($nodename, $locale = false){
+        $data = $this->container->get('rc.phpcr.reorder.nodes.authorizenode');
+        $parentpath = $data->getParentPath($nodename);
+
+        if($data->isAuthorized($parentpath)){
+            return $this->container->get('router')->generate('rcphpcr_reorder_nodes_homepage', array('nodename' => $parentpath, 'locale' => $locale));
+        }
+
+        return false;
     }
    
     public function hasChildren($children){

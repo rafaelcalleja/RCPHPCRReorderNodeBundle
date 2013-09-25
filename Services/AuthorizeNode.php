@@ -14,12 +14,16 @@ class AuthorizeNode {
 		$this->nodes = $nodes;
 		$this->dm = $dm;
 	}
+
+    public function getParentPath($nodepath){
+        return PathHelper::getParentPath(PathHelper::absolutizePath($nodepath, '', false, false));
+    }
 	
 	public function isAuthorized($nodepath){
 		return $this->nodeExists($nodepath) && $this->security->isGranted($this->getRoles($nodepath));
 	}
-	
-	protected function nodeExists($nodepath){
+
+    protected function nodeExists($nodepath){
 
 		foreach($this->nodes as $nodename => $data){
 
@@ -27,12 +31,17 @@ class AuthorizeNode {
 			$data['node'] = PathHelper::absolutizePath($data['node'], '', false, false);
 			$nodepath = PathHelper::absolutizePath($nodepath, '', false, false);
 
+
 			if($data["denied_root"] && $nodepath == $data['node'] ) return false;
 
 
 			if($data['childrens'] &&  strpos( $nodepath, $data['node'], 0 ) !== FALSE ) {
-				$this->nodes[$nodename]['node'] = $nodepath;
-				return $this->isRealNode($this->nodes[$nodename]['node']);
+                //Cuando el nodo es un hijo de un nodo autorizado, copiamos la configuración como nodo nuevo
+
+                $newnodename = 'custom_node_' . strval(count($this->nodes)+1);
+                $this->nodes[$newnodename] = $this->nodes[$nodename];
+                $this->nodes[$newnodename]['node'] = $nodepath;
+				return $this->isRealNode($this->nodes[$newnodename]['node']);
 			}
 
 
